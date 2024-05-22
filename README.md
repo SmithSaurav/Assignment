@@ -1,37 +1,24 @@
 # Assignment
 
-def attendance_probability(N):
-    if N < 1:
-        return "0/0"
+## Question
 
-    # Initialize DP arrays
-    dp = [[0] * 4 for _ in range(N + 1)]
-    dp[0][0] = 1
+In a university, your attendance determines whether you will be
+allowed to attend your graduation ceremony.
+You are not allowed to miss classes for four or more consecutive days.
+Your graduation ceremony is on the last day of the academic year,
+which is the Nth day.
 
-    for i in range(1, N + 1):
-        # dp[i][0]: Ending with attendance on the ith day
-        dp[i][0] = dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][2] + dp[i - 1][3]
-        # dp[i][1]: Ending with 1 day of absence on the ith day
-        if i >= 1:
-            dp[i][1] = dp[i - 1][0]
-        # dp[i][2]: Ending with 2 consecutive days of absence on the ith day
-        if i >= 2:
-            dp[i][2] = dp[i - 1][1]
-        # dp[i][3]: Ending with 3 consecutive days of absence on the ith day
-        if i >= 3:
-            dp[i][3] = dp[i - 1][2]
+ 
 
-    # Total number of ways to attend classes over N days
-    total_ways = dp[N][0] + dp[N][1] + dp[N][2] + dp[N][3]
+  Your task is to determine the following:
 
-    # Number of ways to miss the graduation ceremony
-    ways_to_miss_graduation = dp[N][1] + dp[N][2] + dp[N][3]
+1. The number of ways to attend classes over N days.
+2. The probability that you will miss your graduation ceremony.
 
-    # Return the result in the required format
-    return f"{ways_to_miss_graduation}/{total_ways}"
+Represent the solution in the string format as "Answer of (2) / Answer
+of (1)", don't actually divide or reduce the fraction to decimal
 
+Test cases:
 
-# Test cases
-
-print(attendance_probability(5))  # Output: 14/29
-print(attendance_probability(10))  # Output: 372/773
+for 5 days: 14/29
+for 10 days: 372/773
